@@ -170,6 +170,7 @@ class CloudStorageApplicationTests {
 
 		driver.get(baseURL + "/home");
 		assertTrue(homePage.checkIfCredentialExists("google.com"));
+		assertFalse(homePage.checkIfCredentialExists("bing3.com"));
 	}
 
 	// test password view during editing -- should be a plain text password
