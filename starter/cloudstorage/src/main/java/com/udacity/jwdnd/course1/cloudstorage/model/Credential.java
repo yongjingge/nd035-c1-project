@@ -2,10 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 
 /**
  * create File class to model SQL table "CREDENTIALS"
- *
- * unfinished: do we need the constructor?
- * unfinished: importing User.class for that foreign key? -- yes, userid associated with a User
- * unfinished: key VARCHAR does key field exists?
  */
 
 public class Credential {

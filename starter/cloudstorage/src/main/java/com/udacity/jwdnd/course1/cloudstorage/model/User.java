@@ -2,8 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 
 /**
  * create User class to model SQL table "USERS"
- *
- * unfinished: do we need the constructor?
  */
 
 public class User {
