@@ -114,7 +114,7 @@ public class CredentialController {
 
             try {
                 Integer addedcredentialid = credentialService.addCredential(credentialForm);
-                model.addAttribute("success", addedcredentialid > 0 ? true : false);
+                model.addAttribute("success", addedcredentialid > 0);
             } catch (Exception err) {
                 String errmessage = err.getLocalizedMessage();
                 model.addAttribute("errorhappens", true);

@@ -87,13 +87,12 @@ public class CredentialService {
         return viewCredential;
     }
 
-    // get credentials by user id with ENCRYPTED password
+    // get a list of credentials by user id with ENCRYPTED password
     public List<Credential> getCredentialsByUser (Integer userid) {
-        List<Credential> credentials = credentialMapper.getCredentialsByUserid(userid);
-        return credentials;
+        return credentialMapper.getCredentialsByUserid(userid);
     }
 
-    // get credentials by user id with DECRYPTED password -- will be useful in 'showCredentialModal'
+    // get a list of credentials by user id with DECRYPTED password -- will be useful in 'showCredentialModal'
     public List<Credential> getCredentialsDEByUser (Integer userid) {
         List<Credential> credentials = credentialMapper.getCredentialsByUserid(userid);
         List<Credential> res = new ArrayList<>();

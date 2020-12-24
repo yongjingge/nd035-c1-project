@@ -11,7 +11,8 @@ import java.util.List;
 /**
  * user should be able to upload files and see any files they previously uploaded.
  * user should be able to view/download or delete previously-uploaded files.
- * Any errors related to file actions should be displayed. For example, a user should not be able to upload two files with the same name, but they'll never know unless you tell them!
+ * Any errors related to file actions should be displayed.
+ * For example, a user should not be able to upload two files with the same name, but they'll never know unless you tell them!
  */
 @Service
 public class FileService {
@@ -65,8 +66,7 @@ public class FileService {
     // get userid from fileid -- a method for adding @preAuthorize at @FileController
     public Integer getUseridByFileid (Integer fileid) {
         File theFile = fileMapper.getFileByFileid(fileid);
-        Integer userid = theFile.getUserid();
-        return userid;
+        return theFile.getUserid();
     }
 
     // check if filename available

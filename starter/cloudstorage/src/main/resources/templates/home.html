@@ -147,7 +147,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="credential : ${credentialsDE} ">
+                                <tr th:each="credential : ${credentialsDE}">
                                     <td>
                                         <button th:id="'edit' + ${credential.url}"
                                                 th:attr="credential-id=${credential.credentialid}, credential-url=${credential.url}, credential-username=${credential.username}, credential-password=${credential.password}"
@@ -162,7 +162,8 @@
                                     </td>
                                     <th th:id="${credential.url}" th:text="${credential.url}" scope="row">Example Credential URL</th>
                                     <td th:id="${credential.username}" th:text="${credential.username}">Example Credential Username</td>
-                                    <td th:each="credential : ${credentials}" th:id="${credential.password}" th:text="${credential.password}">Example Credential Password</td>
+                                    <td th:id="${credential.password}" th:text="${credential.password}">Example Credential Password</td>
+
                                 </tr>
                                 </tbody>
                             </table>

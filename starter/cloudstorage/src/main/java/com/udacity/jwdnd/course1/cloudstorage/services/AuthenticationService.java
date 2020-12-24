@@ -14,9 +14,6 @@ import java.util.ArrayList;
  * this class implements AuthenticationProvider and
  * is used to authorise user logins by matching their credentials
  * against those stored in the database.
- *
- * finished
- *
  */
 
 @Service

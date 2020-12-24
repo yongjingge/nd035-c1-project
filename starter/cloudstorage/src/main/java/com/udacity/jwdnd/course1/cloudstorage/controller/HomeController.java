@@ -49,7 +49,6 @@ public class HomeController {
         // "credentials" is a list of credentials with ENCRYPTED password, used in the 'Example Credential Password' table.
         model.addAttribute("credentials", credentialService.getCredentialsByUser(userid));
 
-
         model.addAttribute("files", fileService.getFilesByUserid(userid));
 
         // "credentialsDE" is a list of credentials with DECRYPTED password, used in the 'showCredentialModal'.

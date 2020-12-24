@@ -110,7 +110,7 @@ public class FileController {
         Integer currentuserid = userService.getUserByUsername(authentication.getName()).getUserid();
         try {
             Integer addedfileid = fileService.addFile(fileUpload, currentuserid);
-            model.addAttribute("success", addedfileid > 0 ? true : false);
+            model.addAttribute("success", addedfileid > 0);
         } catch (Exception err) {
             String errmessage = err.getLocalizedMessage();
             model.addAttribute("errorhappens", true);

@@ -113,7 +113,7 @@ public class NoteController {
 
             try {
                 Integer addednoteid = noteService.addNote(noteForm);
-                model.addAttribute("success", addednoteid > 0 ? true : false);
+                model.addAttribute("success", addednoteid > 0);
             } catch (Exception err) {
                 String errmessage = err.getLocalizedMessage();
                 model.addAttribute("errorhappens", true);
