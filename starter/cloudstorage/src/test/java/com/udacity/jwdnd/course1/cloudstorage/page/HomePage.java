@@ -160,15 +160,18 @@ public class HomePage {
         saveCredentialButton.click();
     }
 
-    public boolean checkIfCredentialExists (String url) {
+    public boolean checkIfCredentialExists (String url) throws InterruptedException {
         credentialNav.click();
         wait.until(ExpectedConditions.visibilityOf(credentialTable));
 
         try {
-            return credentialTable.findElement(By.id(url)) != null;
+            if (credentialTable.findElement(By.id(url)) != null) {
+                return true;
+            }
         } catch (org.openqa.selenium.NoSuchElementException err) {
             return false;
         }
+        return false;
     }
 
     public boolean checkIfPasswordIsNotEncrypted (String password) {
@@ -191,7 +194,9 @@ public class HomePage {
         WebElement editButton = credentialTable.findElement(By.id("edit" + oldurl));
         wait.until(ExpectedConditions.visibilityOf(editButton));
 
+        Thread.sleep(3000);
         editButton.click();
+
         Thread.sleep(3000);
 
         credentialurlInput.clear();
@@ -208,6 +213,7 @@ public class HomePage {
 
     }
 
+    // cannot get text from input, will be '' empty
     public String passwordViewDuringEditing (String oldurl) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(credentialNav));
         credentialNav.click();
@@ -218,7 +224,7 @@ public class HomePage {
         editButton.click();
         Thread.sleep(3000);
 
-        String passwordView = editButton.getAttribute("credential-password");
+        String passwordView = credentialpasswordInput.getText();
         return passwordView;
     }
 
