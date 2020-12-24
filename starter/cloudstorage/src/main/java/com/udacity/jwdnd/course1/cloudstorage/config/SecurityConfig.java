@@ -11,7 +11,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 /**
  * this is a security configuration class that restricts unauthorised users from accessing page other than
  * the login and signup page.
- * unfinished: logout msg?
  */
 
 @Configuration
