@@ -1,6 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
-
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import org.apache.ibatis.annotations.*;
 
@@ -8,7 +7,6 @@ import java.util.List;
 
 /**
  * a MyBatis Mapper for SQL table 'CREDENTIALS'
- * unfinished: need an update operation?
  */
 @Mapper
 public interface CredentialMapper {

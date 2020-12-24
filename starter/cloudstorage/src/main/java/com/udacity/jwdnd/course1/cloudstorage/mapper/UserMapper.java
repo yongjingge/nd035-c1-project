@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.*;
 
 /**
  * a MyBatis Mapper for SQL table 'USERS'
- * unfinished: need an update operation?
  */
 @Mapper
 public interface UserMapper {

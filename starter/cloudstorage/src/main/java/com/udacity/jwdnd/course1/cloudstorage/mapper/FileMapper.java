@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * a MyBatis Mapper for SQL table 'FILES'
- * unfinished: do we need to update file?
  */
 @Mapper
 public interface FileMapper {

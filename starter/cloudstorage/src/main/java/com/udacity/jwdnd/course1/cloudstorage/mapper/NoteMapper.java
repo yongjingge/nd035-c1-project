@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * a MyBatis Mapper for SQL table 'NOTES'
- * finished.
  */
 @Mapper
 public interface NoteMapper {
