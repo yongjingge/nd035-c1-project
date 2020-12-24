@@ -218,8 +218,7 @@ public class HomePage {
         editButton.click();
         Thread.sleep(3000);
 
-        String passwordView = credentialpasswordInput.getText();
-//        closeCredentialButton.click();
+        String passwordView = editButton.getAttribute("credential-password");
         return passwordView;
     }
 

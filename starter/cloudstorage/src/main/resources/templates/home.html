@@ -224,7 +224,7 @@
             }
 
             // For opening the credentials modal
-            function showCredentialModal(credentialid, url, username, password) {
+            async function showCredentialModal(credentialid, url, username, password) {
                 $('#credential-id').val(credentialid ? credentialid : '');
                 $('#credential-url').val(url ? url : '');
                 $('#credential-username').val(username ? username : '');
@@ -245,7 +245,6 @@
                     alert("HTTP-Error:" + response.status)
                 }
             }
-
 
         </script>
     </body>

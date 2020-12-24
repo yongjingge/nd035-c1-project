@@ -185,7 +185,7 @@ class CloudStorageApplicationTests {
 		String actualPasswordView = homePage.passwordViewDuringEditing("bing1.com");
 
 		// they should be the same if password during editing process is a decrypted one
-		// assertEquals("password1complicated", actualPasswordView);
+		 assertEquals("password1complicated", actualPasswordView);
 	}
 
 	// TEST DELETING CREDENTIAL
