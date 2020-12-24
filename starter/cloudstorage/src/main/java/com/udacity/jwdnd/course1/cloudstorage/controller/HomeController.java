@@ -51,9 +51,6 @@ public class HomeController {
 
         model.addAttribute("files", fileService.getFilesByUserid(userid));
 
-        // "credentialsDE" is a list of credentials with DECRYPTED password, used in the 'showCredentialModal'.
-        model.addAttribute("credentialsDE", credentialService.getCredentialsDEByUser(userid));
-
         return "home";
     }
 }

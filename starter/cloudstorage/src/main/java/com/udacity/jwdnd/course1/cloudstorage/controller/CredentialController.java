@@ -123,4 +123,21 @@ public class CredentialController {
         }
         return "result";
     }
+
+
+    /**
+     * Get decrypted credential
+     * a controller method with GET Mapping that accepts credentialid as input,
+     * return a STRING that holds decrypted password.
+     * This method can be called using fetch call in JS in home.html
+     * @param credentialid
+     * @param authentication
+     * @return decrypted password
+     */
+    @GetMapping("/getDecryptedCredential")
+    @ResponseBody
+    @PreAuthorize("@this.getUsernameFromCredentialid(#credentialForm.getCredentialid()).equals(#authentication.getName())")
+    public String getDecryptedCredential (@RequestParam("credentialid") Integer credentialid, Authentication authentication) {
+        return credentialService.getCredentialDecrypted(credentialid).getPassword();
+    }
 }
