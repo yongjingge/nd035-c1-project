@@ -47,6 +47,7 @@ class CloudStorageApplicationTests {
 
 	@AfterEach
 	public void afterEach () {
+		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
 

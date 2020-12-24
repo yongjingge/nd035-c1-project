@@ -5,6 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * CredentialController for
@@ -80,12 +83,6 @@ public class CredentialController {
         try {
             credentialService.updateCredential(credentialForm);
             model.addAttribute("success", true);
-//            if (credentialService.getCredential(credentialForm.getCredentialid()) != null) {
-//                credentialService.updateCredential(credentialForm);
-//                model.addAttribute("success", true);
-//            } else {
-//                model.addAttribute("success", false);
-//            }
         } catch (Exception err) {
             String errmessage = err.getLocalizedMessage();
             model.addAttribute("errorhappens", true);
@@ -128,16 +125,18 @@ public class CredentialController {
     /**
      * Get decrypted credential
      * a controller method with GET Mapping that accepts credentialid as input,
-     * return a STRING that holds decrypted password.
+     * return a MAP that holds decrypted password.
      * This method can be called using fetch call in JS in home.html
      * @param credentialid
      * @param authentication
      * @return decrypted password
      */
-    @GetMapping("/getDecryptedCredential")
+    @GetMapping(value = "/getDecryptedCredential", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("@this.getUsernameFromCredentialid(#credentialForm.getCredentialid()).equals(#authentication.getName())")
-    public String getDecryptedCredential (@RequestParam("credentialid") Integer credentialid, Authentication authentication) {
-        return credentialService.getCredentialDecrypted(credentialid).getPassword();
+    public Map<String, String> getDecryptedCredential (@RequestParam("credentialid") Integer credentialid, Authentication authentication) {
+        Map<String, String> res = new HashMap<>();
+        res.put("passwordDE", credentialService.getCredentialDecrypted(credentialid).getPassword());
+        return res;
     }
 }

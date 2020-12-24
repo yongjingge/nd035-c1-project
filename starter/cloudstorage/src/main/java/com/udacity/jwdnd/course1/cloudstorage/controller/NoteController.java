@@ -79,12 +79,6 @@ public class NoteController {
         try {
             noteService.updateNote(noteForm);
             model.addAttribute("success", true);
-//            if (noteService.getNoteByNoteid(noteForm.getNoteid()) != null) {
-//                noteService.updateNote(noteForm);
-//                model.addAttribute("success", true);
-//            } else {
-//                model.addAttribute("success", false);
-//            }
         } catch (Exception err) {
             String errmessage = err.getLocalizedMessage();
             model.addAttribute("errorhappens", true);

@@ -44,6 +44,7 @@ public class HomeController {
 
         String username = authentication.getName();
         Integer userid = userService.getUserByUsername(username).getUserid();
+
         model.addAttribute("notes", noteService.getNotesByUserid(userid));
 
         // "credentials" is a list of credentials with ENCRYPTED password, used in the 'Example Credential Password' table.

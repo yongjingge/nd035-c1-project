@@ -239,7 +239,7 @@
                 if (response.ok) {
                     let data = await response.json()
                     let resultdata = JSON.parse(JSON.stringify(data))
-                    return resultdata
+                    return resultdata.passwordDE
                 }
                 else {
                     alert("HTTP-Error:" + response.status)
