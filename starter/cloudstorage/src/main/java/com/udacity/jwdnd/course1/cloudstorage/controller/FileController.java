@@ -109,16 +109,12 @@ public class FileController {
         // set userid for file
         Integer currentuserid = userService.getUserByUsername(authentication.getName()).getUserid();
 
-        try {
-            Integer addedfileid = fileService.addFile(fileUpload, currentuserid);
-            if (addedfileid == -2) {
-                model.addAttribute("errorhappens", true);
-                model.addAttribute("errormsg", "You haven't selected a file to upload.");
-            } else {
-                model.addAttribute("success", addedfileid > 0);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Integer addedfileid = fileService.addFile(fileUpload, currentuserid);
+        if (addedfileid == -2) {
+            model.addAttribute("errorhappens", true);
+            model.addAttribute("errormsg", "You haven't selected a file to upload!");
+        } else {
+            model.addAttribute("success", addedfileid > 0);
         }
 
         return "result";

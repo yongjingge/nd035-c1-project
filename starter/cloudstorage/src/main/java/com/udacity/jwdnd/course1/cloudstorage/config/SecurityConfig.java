@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup","/css/**", "/js/**").permitAll()
                 .anyRequest()
                 .authenticated();
-                //.exceptionHandling().accessDeniedPage("/error");
         http.formLogin()
                 .loginPage("/login")
                 .permitAll();

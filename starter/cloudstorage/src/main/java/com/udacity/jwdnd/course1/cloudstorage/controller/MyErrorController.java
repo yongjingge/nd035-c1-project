@@ -15,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class MyErrorController implements ErrorController {
 
-    public MyErrorController() {
-    }
-
     @Override
     public String getErrorPath () {
         return null;
@@ -32,9 +29,9 @@ public class MyErrorController implements ErrorController {
             Integer statusCode = Integer.parseInt(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "error404";
+                return "404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "error500";
+                return "500";
             }
         }
 
