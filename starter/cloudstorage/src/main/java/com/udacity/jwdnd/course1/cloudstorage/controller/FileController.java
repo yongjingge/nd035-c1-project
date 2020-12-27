@@ -4,7 +4,6 @@ import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -106,16 +105,22 @@ public class FileController {
      */
     @PostMapping
     public String uploadFile (@RequestParam("fileUpload") MultipartFile fileUpload, Authentication authentication, Model model) throws IOException {
+
         // set userid for file
         Integer currentuserid = userService.getUserByUsername(authentication.getName()).getUserid();
+
         try {
             Integer addedfileid = fileService.addFile(fileUpload, currentuserid);
-            model.addAttribute("success", addedfileid > 0);
-        } catch (Exception err) {
-            String errmessage = err.getLocalizedMessage();
-            model.addAttribute("errorhappens", true);
-            model.addAttribute("errormsg", errmessage);
+            if (addedfileid == -2) {
+                model.addAttribute("errorhappens", true);
+                model.addAttribute("errormsg", "You haven't selected a file to upload.");
+            } else {
+                model.addAttribute("success", addedfileid > 0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         return "result";
     }
 }

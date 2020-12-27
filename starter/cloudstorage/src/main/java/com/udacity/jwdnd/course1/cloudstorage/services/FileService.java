@@ -41,16 +41,24 @@ public class FileService {
     // add file -- its filename, contenttype, filedata.
     public Integer addFile (MultipartFile multipartFile, Integer userid) throws IOException {
         File newFile = new File();
+
+        // check if file is empty
+        if (multipartFile.isEmpty()) {
+            return -2;
+        }
+
         // check if new file name available
         if (! isFilenameAvailable(multipartFile.getOriginalFilename(), userid)) {
             return -1;
         } else {
             newFile.setFilename(multipartFile.getOriginalFilename());
         }
+
         newFile.setContenttype(multipartFile.getContentType());
         newFile.setFiledata(multipartFile.getBytes());
         newFile.setUserid(userid);
         fileMapper.addFile(newFile);
+
         return newFile.getFileid();
     }
 
