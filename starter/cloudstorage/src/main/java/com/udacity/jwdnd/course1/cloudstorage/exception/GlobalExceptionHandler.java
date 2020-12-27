@@ -19,14 +19,21 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public String handleMaxSizeException (MaxUploadSizeExceededException e, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errormsg", "File size exceeds limit!");
-        return "redirect:/result";
+        redirectAttributes.addFlashAttribute("errorinfo", "File size exceeds limit!");
+        return "redirect:/403";
     }
 
     @ExceptionHandler(MultipartException.class)
     public String handleMultipartException (MultipartException e, Model model) {
         model.addAttribute("errorhappens", true);
         model.addAttribute("errormsg", e.getLocalizedMessage());
+        return "result";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String handleException (Exception e, Model model) {
+        model.addAttribute("errorhappens", true);
+        model.addAttribute("errormsg", e.getCause().getLocalizedMessage());
         return "result";
     }
 
