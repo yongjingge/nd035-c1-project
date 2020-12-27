@@ -43,6 +43,7 @@ public class SignupController {
         }
 
         if (signupError == null) {
+            // will be added into login page as well
             model.addAttribute("signupSuccess", true);
         } else {
             model.addAttribute("signupError", signupError);
