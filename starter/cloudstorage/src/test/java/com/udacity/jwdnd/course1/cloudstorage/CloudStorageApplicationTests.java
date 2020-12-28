@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CloudStorageApplicationTests {
 
 	@LocalServerPort
@@ -53,6 +54,7 @@ class CloudStorageApplicationTests {
 
 	// TEST UNAUTHORIZED ACCESS RESTRICTIONS
 	@Test
+	@Order(1)
 	void testUnauthorizedAccessRestriction () {
 		driver.get(baseURL + "/home");
 		assertEquals("Login", driver.getTitle());
@@ -66,6 +68,7 @@ class CloudStorageApplicationTests {
 
 	// TEST USER SIGNUP, LOGIN, AND LOGOUT
 	@Test
+	@Order(2)
 	void testSignup () throws InterruptedException {
 		signupAndLogin();
 		assertEquals("Home", driver.getTitle());
@@ -80,9 +83,12 @@ class CloudStorageApplicationTests {
 
 	// TEST NOTE (CREATE, EDIT, DELETE IN ONE)
 	@Test
+	@Order(3)
 	void testNoteAllMethod () throws InterruptedException {
-		// signup -- login -- create notes
-		signupAndLogin();
+		// create notes
+//		signupAndLogin();
+		loginWithPreviousSignupData();
+
 		homePage.addNote("noteone", "creating a piece of note");
 		Thread.sleep(1000);
 		resultPage.successBack();
@@ -174,10 +180,13 @@ class CloudStorageApplicationTests {
 
 	// TEST CREDENTIAL (CREATE, EDIT, DELETE IN ONE)
 	@Test
+	@Order(4)
 	void testCredentialAllMethod () throws InterruptedException {
 
 		// add credential
-		signupAndLogin();
+//		signupAndLogin();
+		loginWithPreviousSignupData();
+
 		homePage.addCredential("bing1.com", "user1", "password1complicated");
 		Thread.sleep(3000);
 		resultPage.successBack();
@@ -296,6 +305,15 @@ class CloudStorageApplicationTests {
 		signupPage.signup(firstname, lastname, username, password);
 		Thread.sleep(3000);
 
+		loginPage.login(username, password);
+		Thread.sleep(3000);
+	}
+
+	//HELPER METHOD -- JUST LOGIN
+	void loginWithPreviousSignupData () throws InterruptedException {
+		String username = "john01";
+		String password = "badpassword";
+		driver.get(baseURL + "/login");
 		loginPage.login(username, password);
 		Thread.sleep(3000);
 	}
