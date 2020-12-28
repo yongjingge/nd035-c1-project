@@ -13,7 +13,6 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CloudStorageApplicationTests {
@@ -85,7 +84,7 @@ class CloudStorageApplicationTests {
 	@Test
 	@Order(3)
 	void testNoteAllMethod () throws InterruptedException {
-		// create notes
+
 //		signupAndLogin();
 		loginWithPreviousSignupData();
 

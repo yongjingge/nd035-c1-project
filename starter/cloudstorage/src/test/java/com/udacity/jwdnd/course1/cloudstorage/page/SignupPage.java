@@ -1,12 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.page;
 
-/**
- * Selenium Page Object for signup.html
- * -- define element selectors
- * -- initialising web elements
- * -- creating helper methods
- */
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

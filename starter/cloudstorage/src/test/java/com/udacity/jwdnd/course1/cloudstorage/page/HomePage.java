@@ -65,6 +65,7 @@ public class HomePage {
     /**
      * HELPER METHODS DEALING WITH 'ELEMENT NOT VISIBLE' ISSUE
      * Happened after we return back to the page, we lost the same Web Element which we have found last time.
+     * More importantly, add Thread.sleep after we returned the target page so that time will be enough for target elements to be located.
      * @return target Web Element
      */
     public WebElement getNoteNav () {
