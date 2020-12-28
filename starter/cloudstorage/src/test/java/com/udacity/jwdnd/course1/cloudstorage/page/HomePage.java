@@ -1,6 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.page;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,23 +8,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- * Selenium Page Object for signup.html
- * -- define element selectors
- * -- initialising web elements
- * -- creating helper methods
- */
-
 public class HomePage {
 
     // NAVIGATION -- FILES, NOTES, CREDENTIALS
-    @FindBy(id = "nav-files-tab")
+    @FindBy(xpath = "/html/body/div/div[2]/nav/div/a[1]")
     private WebElement fileNav;
 
-    @FindBy(id = "nav-notes-tab")
+    @FindBy(xpath = "/html/body/div/div[2]/nav/div/a[2]")
     private WebElement noteNav;
 
-    @FindBy(id = "nav-credentials-tab")
+    @FindBy(xpath = "/html/body/div/div[2]/nav/div/a[3]")
     private WebElement credentialNav;
 
     @FindBy(id = "logout-button")
@@ -44,14 +36,14 @@ public class HomePage {
     @FindBy(id="save-button-note")
     private WebElement saveNoteButton;
 
-    @FindBy(id = "noteTable")
+    @FindBy(xpath = "/html/body/div/div[2]/div/div[2]/div[1]/table")
     private WebElement noteTable;
 
     // CREDENTIAL RELEVANT
     @FindBy(id = "add-credential-button")
     private WebElement addCredential;
 
-    @FindBy(id = "credentialTable")
+    @FindBy(xpath = "/html/body/div/div[2]/div/div[3]/div[1]/table")
     private WebElement credentialTable;
 
     @FindBy(id = "credential-url")
@@ -70,9 +62,31 @@ public class HomePage {
     private WebElement closeCredentialButton;
 
 
-
-
-
+    /**
+     * HELPER METHODS DEALING WITH 'ELEMENT NOT VISIBLE' ISSUE
+     * Happened after we return back to the page, we lost the same Web Element which we have found last time.
+     * @return target Web Element
+     */
+    public WebElement getNoteNav () {
+        wait.until(ExpectedConditions.elementToBeClickable(noteNav));
+        return noteNav;
+    }
+    public WebElement getFileNav () {
+        wait.until(ExpectedConditions.elementToBeClickable(fileNav));
+        return fileNav;
+    }
+    public WebElement getCredentialNav () {
+        wait.until(ExpectedConditions.elementToBeClickable(credentialNav));
+        return credentialNav;
+    }
+    public WebElement getNoteTable () {
+        wait.until(ExpectedConditions.visibilityOf(noteTable));
+        return noteTable;
+    }
+    public WebElement getCredentialTable () {
+        wait.until(ExpectedConditions.visibilityOf(credentialTable));
+        return credentialTable;
+    }
 
 
     // WAIT
@@ -104,16 +118,18 @@ public class HomePage {
     }
 
     public void deleteNote (String notetitle) throws InterruptedException {
-        noteNav.click();
-        wait.until(ExpectedConditions.visibilityOf(noteTable));
+        getNoteNav().click();
+        getNoteTable();
+
         WebElement deleteLink = noteTable.findElement(By.id("delete" + notetitle));
-        wait.until(ExpectedConditions.visibilityOf(deleteLink));
+        wait.until(ExpectedConditions.elementToBeClickable(deleteLink));
+
         deleteLink.click();
     }
 
-    public boolean checkIfNoteExists (String notetitle) {
-        noteNav.click();
-        wait.until(ExpectedConditions.visibilityOf(noteTable));
+    public boolean checkIfNoteExists (String notetitle) throws InterruptedException {
+        getNoteNav().click();
+        getNoteTable();
 
         try {
             return noteTable.findElement(By.id(notetitle)) != null;
@@ -123,12 +139,11 @@ public class HomePage {
     }
 
     public void editNote (String oldnotetitle, String newnotetitle, String newnotedescription) throws InterruptedException {
+        getNoteNav().click();
+        getNoteTable();
 
-        wait.until(ExpectedConditions.visibilityOf(noteNav));
-        noteNav.click();
-        wait.until(ExpectedConditions.visibilityOf(noteTable));
         WebElement editButton = noteTable.findElement(By.id("edit" + oldnotetitle));
-        wait.until(ExpectedConditions.visibilityOf(editButton));
+        wait.until(ExpectedConditions.elementToBeClickable(editButton));
 
         editButton.click();
         Thread.sleep(3000);
@@ -146,7 +161,8 @@ public class HomePage {
 
     // CREDENTIAL METHODS
     public void addCredential (String credentialurl, String credentialusername, String credentialpassword) throws InterruptedException {
-        credentialNav.click();
+        getCredentialNav().click();
+
         addCredential.click();
         Thread.sleep(3000);
 
@@ -161,8 +177,8 @@ public class HomePage {
     }
 
     public boolean checkIfCredentialExists (String url) throws InterruptedException {
-        credentialNav.click();
-        wait.until(ExpectedConditions.visibilityOf(credentialTable));
+        getCredentialNav().click();
+        getCredentialTable();
 
         try {
             if (credentialTable.findElement(By.id(url)) != null) {
@@ -175,8 +191,8 @@ public class HomePage {
     }
 
     public boolean checkIfPasswordIsNotEncrypted (String password) {
-        credentialNav.click();
-        wait.until(ExpectedConditions.visibilityOf(credentialTable));
+        getCredentialNav().click();
+        getCredentialTable();
 
         try {
             return credentialTable.findElement(By.id(password)) != null;
@@ -187,9 +203,8 @@ public class HomePage {
     }
 
     public void editCredential (String oldurl, String newurl, String newusername, String newpassword) throws InterruptedException {
-
-        wait.until(ExpectedConditions.visibilityOf(credentialNav));
-        credentialNav.click();
+        getCredentialNav().click();
+        getCredentialTable();
 
         WebElement editButton = credentialTable.findElement(By.id("edit" + oldurl));
         wait.until(ExpectedConditions.visibilityOf(editButton));
@@ -215,8 +230,7 @@ public class HomePage {
 
     // cannot get text from input, will be '' empty
     public String passwordViewDuringEditing (String oldurl) throws InterruptedException {
-        wait.until(ExpectedConditions.visibilityOf(credentialNav));
-        credentialNav.click();
+        wait.until(ExpectedConditions.elementToBeClickable(getCredentialNav())).click();
 
         WebElement editButton = credentialTable.findElement(By.id("edit" + oldurl));
         wait.until(ExpectedConditions.visibilityOf(editButton));
@@ -229,8 +243,9 @@ public class HomePage {
     }
 
     public void deleteCredential (String url) throws InterruptedException {
-        credentialNav.click();
-        wait.until(ExpectedConditions.visibilityOf(credentialTable));
+        getCredentialNav().click();
+        getCredentialTable();
+
         WebElement deleteLink = credentialTable.findElement(By.id("delete" + url));
         wait.until(ExpectedConditions.visibilityOf(deleteLink));
         deleteLink.click();
